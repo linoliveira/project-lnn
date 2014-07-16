@@ -17,6 +17,7 @@
 @section('content')
 
     <h1>Edit Person</h1>
+    <p class="text-right lead">{{ link_to('/logout', 'Logout') }}</p>
     {{ Form::model($person, array('method' => 'PATCH', 'route' => array('people.update', $person->id))) }}
 
 <ul>

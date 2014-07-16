@@ -17,7 +17,7 @@
 @section('content')
 
     <h1>Create Person</h1>
-
+    <p class="text-right lead">{{ link_to('/logout', 'Logout') }}</p>
     {{ Form::open(array('route' => 'people.store')) }}
     <ul>
         <li>

@@ -1,20 +1,27 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1>Register Form</h1>
-    @foreach ($errors->all() as $error)
 
-            <p class="error">{{ $error }}<p>
+    <center class="well">
 
-    @endforeach
-    {{  Form::open() }}
+        <h1>Register Form</h1>
 
-        <input type="text" name="email" placeholder="email" /><br/>
-        <input type="password" name="password" placeholder="password" /><br/>
-        <input type="password" name="password_confirmation" placeholder="password" /><br/>
-        <input type="submit" value="Register" />
+        @foreach ($errors->all() as $error)
 
-    {{ Form::close() }}
+                <p class="error">{{ $error }}<p>
 
-    <a href="/login">Alredy registered? Login here.</a>
+        @endforeach
+
+        {{  Form::open() }}
+
+            <br/><input type="text" name="email" placeholder="email@host.domain" /><br/><br/>
+            <input type="password" name="password" placeholder="password" /><br/><br/>
+            <input type="password" name="password_confirmation" placeholder="password" /><br/><br/>
+            <input type="submit" value="Register" class="btn btn-success"/>
+
+        {{ Form::close() }}
+
+        <a href="/login">Alredy registered? Login here.</a>
+
+    </center>
 @stop

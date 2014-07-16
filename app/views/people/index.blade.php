@@ -3,7 +3,8 @@
 @section('content')
 
     <h1>All Persons</h1>
-    <p>{{ link_to_route('people.create', 'Add new Person') }}</p>
+    <p class="text-right lead">{{ link_to('/logout', 'Logout') }}</p>
+    <p class="lead">{{ link_to_route('people.create', 'Add new Person') }}</p>
 
     @if($people->count())
         <table class="table table-striped table-bordered table-hover">

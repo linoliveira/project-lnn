@@ -56,7 +56,7 @@ class AuthController extends Controller
 	{
 		$data = Input::all();
 		$rules = array (
-			'email' => 'email|unique:user',
+			'email' => 'required|email|unique:user',
 			'password' => 'required|confirmed|min:5',
 		);
 		$validator = Validator::make($data, $rules);

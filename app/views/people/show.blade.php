@@ -3,8 +3,8 @@
 @section('content')
 
     <h1>Show Person</h1>
-
-    <p>{{ link_to_route('people.index', 'Return to all Persons') }}</p>
+    <p class="text-right lead">{{ link_to('/logout', 'Logout') }}</p>
+    <p class="lead">{{ link_to_route('people.index', 'Return to all Persons') }}</p>
 
     <table id="show" class="table table-striped table-bordered table-hover">
         <tbody>

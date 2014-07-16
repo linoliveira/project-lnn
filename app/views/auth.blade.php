@@ -1,22 +1,28 @@
 @extends ('layouts.master')
 
 @section('content')
-    <h1>Login Form</h1>
-    @foreach ($errors->all() as $error)
 
-        <p class="error">{{ $error }}<p>
+    <center class="well">
 
-    @endforeach
+        <h1>Login Form</h1>
 
-    {{ Form::open() }}
+        @foreach ($errors->all() as $error)
 
-        <input type="text" name="email" placeholder="email" /><br/>
-        <input type="password" name="password" placeholder="password" /><br/>
-        <input type="submit" value="Entrar" />
+            <p class="error">{{ $error }}<p>
 
-    {{ Form::close() }}
+        @endforeach
 
-    <br/><a href="/register">Not registered? Register here.</a>
+        {{ Form::open() }}
+
+            <br/><input type="text" name="email" placeholder="email@host.domain" /><br/><br/>
+            <input type="password" name="password" placeholder="password" /><br/><br/>
+            <input type="submit" value="Entrar" class="btn btn-info"/>
+
+        {{ Form::close() }}
+
+        <br/><a href="/register">Not registered? Register here.</a>
+
+    </center>
 
     {{ isset($js) ? $js : '' }}
 @stop
