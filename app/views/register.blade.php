@@ -1,4 +1,4 @@
-@extends('layouts.layout_auth')
+@extends('layouts.master')
 
 @section('content')
     <h1>Register Form</h1>

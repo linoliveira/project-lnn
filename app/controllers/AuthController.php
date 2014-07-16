@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Lino
- * Date: 15-07-2014
- * Time: 2:34
- */
+
 class AuthController extends Controller
 {
 	public function getLogin ()
@@ -22,53 +17,51 @@ class AuthController extends Controller
 		);
 		$validator = Validator::make(Input::all(), $rules);
 
-		if($validator->fails())
+		if ( $validator->fails() )
 		{
 			return Redirect::route('login')->withErrors($validator);
 		}
 
-		$auth = Auth::attempt(array(
+		$auth = Auth::attempt(array (
 			'email' => Input::get('email'),
 			'password' => Input::get('password')
 		), false);
 
-		if(!$auth)
+		if ( !$auth )
 		{
-			return Redirect::route('login')->withErrors(array(
-				'Dados de utilizador inválidos'
+			return Redirect::route('login')->withErrors(array (
+				'Invalid user credentials'
 			));
 		}
 
-		return Redirect::route('main');
+		return Redirect::route('people.index');
 	}
 
-	public function getLogout()
+	public function getLogout ()
 	{
-		if(Auth::check())
+		if ( Auth::check() )
 		{
 			Auth::logout();
 		}
 
-		Auth::logout();
-
 		return Redirect::route('login');
 	}
 
-	public function getRegister()
+	public function getRegister ()
 	{
 		return View::make('register');
 	}
 
-	public function postRegister()
+	public function postRegister ()
 	{
 		$data = Input::all();
-		$rules = array(
+		$rules = array (
 			'email' => 'email|unique:user',
 			'password' => 'required|confirmed|min:5',
 		);
 		$validator = Validator::make($data, $rules);
 
-		if($validator->fails())
+		if ( $validator->fails() )
 		{
 			return Redirect::route('register')->withErrors($validator);
 		}
@@ -77,6 +70,9 @@ class AuthController extends Controller
 		$user->email = $data['email'];
 		$user->password = Hash::make($data['password']);
 		$user->save();
-		return Redirect::route('login')->with('js', "<script>alert('Registration successful! Please Login.')</script>");
+
+		$message = "<script>alert('Registration successful! Please Login.')</script>";
+
+		return Redirect::route('login')->with('js', $message);
 	}
 }

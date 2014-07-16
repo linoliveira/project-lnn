@@ -19,3 +19,5 @@ Route::get('/logout', array('uses' => 'AuthController@getLogout'));
 
 Route::get('/register', array('as' => 'register', 'uses' => 'AuthController@getRegister'));
 Route::post('register', array('uses' => 'AuthController@postRegister'));
+
+Route::resource('people', 'PeopleController');
