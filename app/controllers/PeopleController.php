@@ -7,6 +7,8 @@ class PeopleController extends \BaseController
 	public function __construct (Person $person)
 	{
 		$this->person = $person;
+
+		$this->beforeFilter('auth');
 	}
 
 	/**
@@ -18,6 +20,7 @@ class PeopleController extends \BaseController
 	public function index ()
 	{
 		$people = $this->person->all();
+
 		return View::make('people.index', compact('people'));
 	}
 
@@ -29,6 +32,11 @@ class PeopleController extends \BaseController
 	 */
 	public function create ()
 	{
+		if(!Auth::user()->can("can_create"))
+		{
+			App::abort(403, 'Unauthorized action.');
+		}
+
 		return View::make('people.create');
 	}
 
@@ -66,6 +74,11 @@ class PeopleController extends \BaseController
 	 */
 	public function show ($id)
 	{
+		if(!Auth::user()->can("can_read"))
+		{
+			App::abort(403, 'Unauthorized action.');
+		}
+
 		$person = $this->person->findOrFail($id);
 
 		return View::make('people.show', compact('person'));
@@ -80,6 +93,11 @@ class PeopleController extends \BaseController
 	 */
 	public function edit ($id)
 	{
+		if(!Auth::user()->can("can_update"))
+		{
+			App::abort(403, 'Unauthorized action.');
+		}
+
 		$person = $this->person->find($id);
 
 		if ( is_null($person) )
@@ -125,6 +143,11 @@ class PeopleController extends \BaseController
 	 */
 	public function destroy ($id)
 	{
+		if(!Auth::user()->can("can_delete"))
+		{
+			App::abort(403, 'Unauthorized action.');
+		}
+
 		$this->person->find($id)->delete();
 
 		return Redirect::route('people.index');

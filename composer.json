@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"barryvdh/laravel-ide-helper": "v1.10.0",
-        "way/generators": "2.*"
+        "way/generators": "2.*",
+        "zizaco/entrust": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

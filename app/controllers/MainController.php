@@ -9,8 +9,6 @@
 class MainController extends BaseController{
 public function getIndex()
 {
-	$user = User::find(Auth::user()->getAuthIdentifier());
-
-	return View::make('main')->with('user', $user->getAttribute('email'));
+	return Redirect::route('people.index');
 }
 } 
