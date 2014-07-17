@@ -23,7 +23,7 @@ class Person extends \Eloquent
 		'gender' => 'required|alpha',
 		'phone' => 'required|numeric|digits_between:7,15',
 		'email' => 'required|email',
-		'address' => 'required|alpha-dash',
+		'address' => 'required',
 		'profession' => 'required|alpha',
 		'civil_status' => 'required|alpha'
 	);

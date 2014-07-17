@@ -71,6 +71,14 @@ class AuthController extends Controller
 		$user->password = Hash::make($data['password']);
 		$user->save();
 
+		$role = new Role();
+		$role->name = 'User'.User::where('email','=',$user->email)->first()->id;
+		$role->save();
+		$role->perms()->attach(1);  // permission to create
+		$role->perms()->attach(2);  // permission to read
+
+		$user->attachRole($role);
+
 		$message = "<script>alert('Registration successful! Please Login.')</script>";
 
 		return Redirect::route('login')->with('js', $message);

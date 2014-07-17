@@ -23,7 +23,7 @@
 <ul>
         <li>
             {{ Form::label('name', 'Name:') }}<br/>
-            {{ Form::text('name') }}
+            {{ Form::text('name', null, array('class' => 'input-large')) }}
         </li>
         <li>
             {{ Form::label('surname', 'Surname:') }}<br/>
@@ -35,7 +35,7 @@
         </li>
         <li>
             {{ Form::label('gender', 'Gender:') }}<br/>
-            {{ Form::select('gender', array('Female' => 'Female', 'Male' => 'Male'), 'Male') }}
+            {{ Form::select('gender', array('Female' => 'Female', 'Male' => 'Male'), $person->gender) }}
         </li>
         <li>
             {{ Form::label('phone', 'Phone:') }}<br/>
@@ -55,7 +55,7 @@
         </li>
         <li>
             {{ Form::label('civil_status', 'Civil status:') }}<br/>
-            {{ Form::select('civil_status', array('Married' => 'Married', 'Single' => 'Single'), 'Married') }}<br/><br/>
+            {{ Form::select('civil_status', array('Married' => 'Married', 'Single' => 'Single'), $person->civil_status) }}<br/><br/>
         </li>
         <li>
             {{ Form::submit('Update', array('class' => 'btn btn-success')) }}

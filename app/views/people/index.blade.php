@@ -4,6 +4,9 @@
 
     <h1>All Persons</h1>
     <p class="text-right lead">{{ link_to('/logout', 'Logout') }}</p>
+    @if (isset($admin))
+        <p class="text-right lead">{{ link_to('/users', 'Manage Users') }}</p>
+    @endif
     <p class="lead">{{ link_to_route('people.create', 'Add new Person') }}</p>
 
     @if($people->count())

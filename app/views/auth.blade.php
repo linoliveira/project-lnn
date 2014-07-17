@@ -16,7 +16,7 @@
 
             <br/><input type="text" name="email" placeholder="email@host.domain" /><br/><br/>
             <input type="password" name="password" placeholder="password" /><br/><br/>
-            <input type="submit" value="Entrar" class="btn btn-info"/>
+            <input type="submit" value="Login" class="btn btn-info"/>
 
         {{ Form::close() }}
 

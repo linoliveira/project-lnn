@@ -20,8 +20,9 @@ class PeopleController extends \BaseController
 	public function index ()
 	{
 		$people = $this->person->all();
+		$admin = Auth::user()->hasRole('Admin');
 
-		return View::make('people.index', compact('people'));
+		return View::make('people.index', compact('people', $admin ? 'admin' : ''));
 	}
 
 	/**
@@ -34,7 +35,7 @@ class PeopleController extends \BaseController
 	{
 		if(!Auth::user()->can("can_create"))
 		{
-			App::abort(403, 'Unauthorized action.');
+			return Redirect::route('people.index');
 		}
 
 		return View::make('people.create');
@@ -48,6 +49,11 @@ class PeopleController extends \BaseController
 	 */
 	public function store ()
 	{
+		if(!Auth::user()->can("can_create"))
+		{
+			return Redirect::route('people.index');
+		}
+
 		$input = Input::all();
 
 		$validator = Validator::make($input, Person::$rules);
@@ -61,8 +67,7 @@ class PeopleController extends \BaseController
 
 		return Redirect::route('people.create')
 			->withInput()
-			->withErrors($validator)
-			->with('message', 'There were validation errors');
+			->withErrors($validator);
 	}
 
 	/**
@@ -76,7 +81,7 @@ class PeopleController extends \BaseController
 	{
 		if(!Auth::user()->can("can_read"))
 		{
-			App::abort(403, 'Unauthorized action.');
+			return Redirect::route('people.index');
 		}
 
 		$person = $this->person->findOrFail($id);
@@ -95,7 +100,7 @@ class PeopleController extends \BaseController
 	{
 		if(!Auth::user()->can("can_update"))
 		{
-			App::abort(403, 'Unauthorized action.');
+			return Redirect::route('people.index');
 		}
 
 		$person = $this->person->find($id);
@@ -117,6 +122,11 @@ class PeopleController extends \BaseController
 	 */
 	public function update ($id)
 	{
+		if(!Auth::user()->can("can_update"))
+		{
+			return Redirect::route('people.index');
+		}
+
 		$input = array_except(Input::all(), '_method');
 		$validator = Validator::make($input, Person::$rules);
 
@@ -130,8 +140,7 @@ class PeopleController extends \BaseController
 
 		return Redirect::route('people.edit', $id)
 			->withInput()
-			->withErrors($validator)
-			->with('message', 'There were validation errors');
+			->withErrors($validator);
 	}
 
 	/**
@@ -145,12 +154,11 @@ class PeopleController extends \BaseController
 	{
 		if(!Auth::user()->can("can_delete"))
 		{
-			App::abort(403, 'Unauthorized action.');
+			return Redirect::route('people.index');
 		}
 
 		$this->person->find($id)->delete();
 
 		return Redirect::route('people.index');
 	}
-
 }

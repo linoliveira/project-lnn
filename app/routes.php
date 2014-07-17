@@ -22,6 +22,12 @@ Route::post('register', array('uses' => 'AuthController@postRegister'))->before(
 
 Route::resource('people', 'PeopleController');
 
+Route::get('/users', array('as' => 'users', 'uses' => 'ManageUsersController@getUsers'))->before('auth');
+Route::post('/users', array('uses' => 'ManageUsersController@postUsers'))->before('csrf');
+
+//Route::get('/perm', function(){dd(Auth::user()->can('update'));});
+//Route::get('/perm', function(){dd('User'.User::where('email','=',Auth::user()->email)->first()->id);});
+
 /*Route::get('/start', function()
 {
 	$admin = new Role();
